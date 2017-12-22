@@ -1,5 +1,5 @@
 # sampleServer
-Very simple stream server based on Beej's Guide to Network Programming stream server code.
+Very simple stream server based on [Beej's Guide to Network Programming](http://beej.us/guide/bgnet/html/multi/index.html) stream server code.
 
 ## Getting started
 
