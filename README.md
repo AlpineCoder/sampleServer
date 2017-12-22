@@ -1,4 +1,4 @@
-# sampleServer
+# simpleServer
 Very simple stream server based on [Beej's Guide to Network Programming](http://beej.us/guide/bgnet/html/multi/index.html) stream server code.
 
 ## Getting started
@@ -10,8 +10,8 @@ You need cmake 3.1 or higher and a compiler that supports C++14. Tested with g++
 ### Building
 
 ```
-$ git clone https://github.com/AlpineCoder/sampleServer
-$ cd sampleServer
+$ git clone https://github.com/AlpineCoder/simpleServer
+$ cd simpleServer
 $ cmake .
 $ make
 ```
@@ -19,7 +19,7 @@ $ make
 ### Running it
 
 ```
-$ ./sampleServer <-p port_number> [-v 4|6]
+$ ./simpleServer <-p port_number> [-v 4|6]
 ```
 
 You can connect to it using telnet. For example if the server is listening on port 1234:
