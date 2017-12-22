@@ -16,24 +16,26 @@
 // port_param -> value from argument
 bool CheckPortNumber(int & port_number, const char* port_param);
 
+// checks if ip version is ok.
+// Args:
+// protocol_version -> expected to be 4 or 6
+// port_param -> value from argument
 bool CheckIPVersion(int & protocol_version, char* protocol_param);
 
 int main(int argc, char** argv)
 {
+  // Just for the output for now
   std::vector<std::string> ip_protocol_versions;
   ip_protocol_versions.push_back("IPv4");
   ip_protocol_versions.push_back("IPv6");
   ip_protocol_versions.push_back("Any");
-  int port_number, protocol_version;
 
-  port_number = 0;
-  protocol_version = 0;
+
+  int port_number = 0, protocol_version = 0;
 
   // Fun with good old getopt!
-  int opt,p,v;
+  int opt,p = -1,v = -1;
 
-  p = -1;
-  v = -1;
   ProtocolVersion pv = ANY;
 
   while((opt = getopt(argc, argv,"p:v:")) != EOF)
@@ -67,7 +69,6 @@ int main(int argc, char** argv)
       return 1;
     }
 
-
   switch (protocol_version){
     case 4 :
       pv = IPV4;
@@ -82,8 +83,7 @@ int main(int argc, char** argv)
 
   std::cout << "Starting simpleServer on " << port_number << " with Protocol " << ip_protocol_versions[pv] << "\n";
 
-  // Start working with the sockets
-
+  // Start working with the socket
   auto socket = std::make_unique<SimpleSocket>(port_number, pv);
   try{
     socket->CreateSocket();
@@ -98,21 +98,10 @@ int main(int argc, char** argv)
 
 bool CheckPortNumber(int & port_number, const char* port_param){
   std::stringstream ss(port_param);
-  if(ss >> port_number && (port_number < USHRT_MAX && port_number > 0)){
-      return true;
-    }
-  else{
-      return false;
-    }
+  return (ss >> port_number && port_number < USHRT_MAX) ? true : false;
 }
 
 bool CheckIPVersion(int &protocol_version, char *protocol_param){
   std::stringstream ss(protocol_param);
-  if(ss >> protocol_version && (protocol_version == 4 || protocol_version == 6)){
-      return true;
-    }
-  else{
-      return false;
-    }
-
+  return (ss >> protocol_version && (protocol_version == 4 || protocol_version == 6)) ? true : false;
 }
