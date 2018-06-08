@@ -17,6 +17,7 @@
 enum ProtocolVersion {IPV4, IPV6, ANY};
 
 // Creates a simple TCP stream socket
+// adding a feature
 class SimpleSocket
 {
 public:
