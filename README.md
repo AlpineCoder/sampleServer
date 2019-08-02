@@ -34,3 +34,5 @@ Connection to ::1 closed by foreign host.
 
 To stop the server, just use ctrl-c.
 
+Have fun!
+
