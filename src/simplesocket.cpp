@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <string>
+#include <ctime>
 #include "../include/simplesocket.h"
 
 // we use BSD sockets here for fun!
@@ -92,7 +93,9 @@ void SimpleSocket::Listen(){
       inet_ntop(their_addr.ss_family,
                 get_in_addr((struct sockaddr *)&their_addr),
                 s, sizeof s);
-      printf("server: got connection from %s\n", s);
+      time_t now = time(0);
+      char* dt = ctime(&now);
+      printf("server: %s got connection from %s\n", dt, s);
 
       if (!fork()) { // this is the child process
           close(sockfd); // child doesn't need the listener
